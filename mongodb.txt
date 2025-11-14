@@ -35,6 +35,7 @@ show <db name>
 # create new db, or use existing db
 use db123
 
+# insert collection
 db.movies.insertOne(
   {
     title: "The Favourite",
@@ -49,9 +50,16 @@ db.movies.insertOne(
 )
 
 db.getCollectionNames()
+
+# dump data as json
 db.movies.find().pretty()
 
-# drop collection
+db.getCollectionNames().forEach(col => {
+    print(`--- ${col} ---`);
+    db[col].find().forEach(doc => printjson(doc));
+  });
+
+# drop/delete collection
 db.getCollectionNames()
 db.movies.dropDatabase()
 db.getCollectionNames()
