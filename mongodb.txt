@@ -36,28 +36,77 @@ show <db name>
 use db123
 
 # insert collection
-db.movies.insertOne(
-  {
-    title: "The Favourite",
-    genres: [ "Drama", "History" ],
-    runtime: 121,
-    rated: "R",
-    year: 2018,
-    directors: [ "Yorgos Lanthimos" ],
-    cast: [ "Olivia Colman", "Emma Stone", "Rachel Weisz" ],
-    type: "movie"
-  }
+db.MyDB.insertOne(
+	{
+		John : "Doe",
+		number : [1,2,3]
+	}
 )
 
+db.MyDB.insertMany(
+[
+	{
+		Max : "Caulfield"
+	},
+	{
+		Chloe : "Price"
+	},
+	{
+		Rachel : "Amber"
+	},
+	{
+		Kate : "Marsh"
+	}
+]
+)
+
+db.MyDB.find()
+
+db.MyDB.findOne({John : "Doe"})
+db.MyDB.findOne({Max:"Caulfield"})
+
+db.movies.insertOne(
+	{
+		title: "The Favourite",
+		genres: [ "Drama", "History" ],
+		runtime: 121,
+		rated: "R",
+		year: 2018,
+		directors: [ "Yorgos Lanthimos" ],
+		cast: [ "Olivia Colman", "Emma Stone", "Rachel Weisz" ],
+		type: "movie"
+	}
+)
+
+db.movies.insertOne(
+	{
+		title: "Fight Club",
+		genres: [ "Action", "Fight" ],
+		runtime: 139,
+		rated: "R",
+		year: 1999,
+		directors: [ "David Fincher" ],
+		cast: [ "Brad Pitt", "Edward Norton"],
+		type: "movie"
+	}
+)
+
+# get all collection names
 db.getCollectionNames()
 
 # dump data as json
+db.movies.find()
 db.movies.find().pretty()
 
 db.getCollectionNames().forEach(col => {
-    print(`--- ${col} ---`);
-    db[col].find().forEach(doc => printjson(doc));
-  });
+		print(`--- ${col} ---`);
+		db[col].find().forEach(doc => printjson(doc));
+	});
+
+# count
+db.movies.countDocuments()
+
+
 
 # drop/delete collection
 db.getCollectionNames()
