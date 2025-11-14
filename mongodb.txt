@@ -1,9 +1,11 @@
 # run as root
 su
 
-# Download
+# Download mongodb server/shell/cli/gui
 https://www.mongodb.com/try/download/community
-
+https://www.mongodb.com/try/download/shell
+https://www.mongodb.com/try/download/atlascli
+https://www.mongodb.com/try/download/compass
 
 # Install (debian/ubuntu)
 dpkg -i ./mongodb-org-server_8.2.1_amd64.deb
@@ -11,10 +13,53 @@ dpkg -i ./mongodb-org-server_8.2.1_amd64.deb
 
 -----------------------------
 
-# create default db path
+# create default db path, must create path before running mongod
 mkdir -p /data/db
 
 # run server
 mongod
+
+----------------------
+# run client shell
+> mongosh "mongodb+srv://mycluster.abcd1.mongodb.net/myFirstDatabase" --apiVersion 1 --username <username>
+
+# local mongodb /data/db
+> mongosh
+help
+show dbs
+show collections
+show users
+show <db name>
+
+
+# create new db, or use existing db
+use db123
+
+db.movies.insertOne(
+  {
+    title: "The Favourite",
+    genres: [ "Drama", "History" ],
+    runtime: 121,
+    rated: "R",
+    year: 2018,
+    directors: [ "Yorgos Lanthimos" ],
+    cast: [ "Olivia Colman", "Emma Stone", "Rachel Weisz" ],
+    type: "movie"
+  }
+)
+
+db.getCollectionNames()
+db.movies.find().pretty()
+
+# drop collection
+db.getCollectionNames()
+db.movies.dropDatabase()
+db.getCollectionNames()
+
+# drop db
+db.dropDatabase()
+
+
+
 
 
