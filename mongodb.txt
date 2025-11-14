@@ -1,7 +1,7 @@
 # run as root
 su
 
-# Download mongodb server/shell/cli/gui
+# Download mongodb server/shell cli/atlas cli/compass gui
 https://www.mongodb.com/try/download/community
 https://www.mongodb.com/try/download/shell
 https://www.mongodb.com/try/download/atlascli
@@ -19,11 +19,16 @@ mkdir -p /data/db
 # run server
 mongod
 
-----------------------
-# run mongosh (client cli)
+
+
+======================================
+======================================
+
+
+// run mongosh (client cli), connect to server
 > mongosh "mongodb+srv://mycluster.abcd1.mongodb.net/myFirstDatabase" --apiVersion 1 --username <username>
 
-# connect to local mongodb /data/db
+// connect to local mongodb /data/db
 > mongosh
 help
 show dbs
@@ -32,13 +37,10 @@ show users
 show <db name>
 
 
-# create new db, or use existing db
-# insert one data to db
-# insert many data to db
-
+// create new db, or use existing db
 use db123
 
-
+// insert one data to db
 db.MyDB.insertOne(
 	{
 		John : "Doe",
@@ -46,6 +48,7 @@ db.MyDB.insertOne(
 	}
 )
 
+// insert many data to db
 db.MyDB.insertMany(
 	[
 		{
@@ -95,7 +98,7 @@ db.movies.insertOne(
 )
 
 
-# get last 2 value
+// get last 2 value
 db.MyDB
   .find()
   .sort({ _id: -1 })   // -1 newest first, 1 oldest
@@ -103,10 +106,10 @@ db.MyDB
   .toArray()
 
 
-# get all collection names
+// get all collection names
 db.getCollectionNames()
 
-# dump data as json
+// dump data as json
 db.movies.find()
 db.movies.find().pretty()
 
@@ -117,17 +120,17 @@ db.getCollectionNames().forEach(col => {
 
 	
 
-# count
+// count
 db.movies.countDocuments()
 
 
 
-# drop/delete collection
+// drop/delete collection
 db.getCollectionNames()
 db.movies.dropDatabase()
 db.getCollectionNames()
 
-# drop db
+// drop db
 db.dropDatabase()
 
 
