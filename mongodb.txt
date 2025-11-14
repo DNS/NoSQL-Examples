@@ -20,10 +20,10 @@ mkdir -p /data/db
 mongod
 
 ----------------------
-# run client shell
+# run mongosh (client cli)
 > mongosh "mongodb+srv://mycluster.abcd1.mongodb.net/myFirstDatabase" --apiVersion 1 --username <username>
 
-# local mongodb /data/db
+# connect to local mongodb /data/db
 > mongosh
 help
 show dbs
