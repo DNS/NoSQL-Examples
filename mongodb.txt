@@ -33,9 +33,12 @@ show <db name>
 
 
 # create new db, or use existing db
+# insert one data to db
+# insert many data to db
+
 use db123
 
-# insert collection
+
 db.MyDB.insertOne(
 	{
 		John : "Doe",
@@ -44,20 +47,20 @@ db.MyDB.insertOne(
 )
 
 db.MyDB.insertMany(
-[
-	{
-		Max : "Caulfield"
-	},
-	{
-		Chloe : "Price"
-	},
-	{
-		Rachel : "Amber"
-	},
-	{
-		Kate : "Marsh"
-	}
-]
+	[
+		{
+			Max : "Caulfield"
+		},
+		{
+			Chloe : "Price"
+		},
+		{
+			Rachel : "Amber"
+		},
+		{
+			Kate : "Marsh"
+		}
+	]
 )
 
 db.MyDB.find()
@@ -91,6 +94,15 @@ db.movies.insertOne(
 	}
 )
 
+
+# get last 2 value
+db.MyDB
+  .find()
+  .sort({ _id: -1 })   // newest first
+  .limit(2)
+  .toArray()
+
+
 # get all collection names
 db.getCollectionNames()
 
@@ -102,6 +114,8 @@ db.getCollectionNames().forEach(col => {
 		print(`--- ${col} ---`);
 		db[col].find().forEach(doc => printjson(doc));
 	});
+
+	
 
 # count
 db.movies.countDocuments()
