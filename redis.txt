@@ -116,3 +116,12 @@ HSET myHash a:b c
 HGET myhash a:b
 HGETALL myHash
 
+
+
+
+
+
+
+
+
+
