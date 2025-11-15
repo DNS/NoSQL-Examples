@@ -111,4 +111,8 @@ HGET user:1 name
 HGETALL user:1
 HMSET user:2 name "Jane" age 25 city "NYC"
 
+# multi hashes
+HSET myHash a:b c
+HGET myhash a:b
+HGETALL myHash
 
