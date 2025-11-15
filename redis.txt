@@ -13,7 +13,7 @@ exit
 # run as user
 redis-commander
 
-----------------------
+==================================
 
 # run server
 redis-server
@@ -31,11 +31,14 @@ redis-cli -u redis://myuser:mypassword@localhost:6379
 # If you run Redis through Docker
 docker exec -it <container-id-or-name> redis-cli
 
----------------
+==================================
 > redis-cli
 
 # Test connection
 PING
+
+# clear screen
+CLEAR
 
 # Set and get values
 SET myKey "Hello"
@@ -69,18 +72,43 @@ DEL myKey
 INFO server
 INFO keyspace
 
+-------------
+# List: Ordered collections of strings
 
-# Push elements
-LPUSH mylist "first"      # Push to left (head)
-RPUSH mylist "last"       # Push to right (tail)
+# Push/Pop/Get elements
+LPUSH mylist "first"
+RPUSH mylist "last"
+LPOP mylist
+RPOP mylist
+LRANGE mylist 0 -1
+LINDEX mylist 0
+LLEN mylist
 
-# Pop elements
-LPOP mylist              # Pop from left
-RPOP mylist              # Pop from right
+--------------
+# Sets: Unordered collections of unique strings
 
-# Get elements
-LRANGE mylist 0 -1       # Get all elements
-LINDEX mylist 0          # Get element at index
-LLEN mylist             # Get list length
+# Add members
+SADD myset "member1"
+SADD myset "member2" "member3"
+
+# Check membership
+SISMEMBER myset "member1"
+
+# Get members
+SMEMBERS myset
+
+# Set operations
+SUNION set1 set2
+SINTER set1 set2
+SDIFF set1 set2
+
+--------------
+
+# Hashes: key-value pairs
+HSET user:1 name "John"
+HSET user:1 age 30
+HGET user:1 name
+HGETALL user:1
+HMSET user:2 name "Jane" age 25 city "NYC"
 
 
