@@ -1,10 +1,86 @@
+# install redis, as root
+su
 curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/redis.list
 apt update
-apt -y install redis
+apt -y install redis 
+
+# install redis gui, as root
+su
+nodejs npm
+npm install -g redis-commander
+exit
+# run as user
+redis-commander
+
+----------------------
 
 # run server
 redis-server
 
 # run cli
+# Syntax
+redis-cli -u redis://host:port
+redis-cli -u redis://username:password@host:port
+
+# Examples
 redis-cli
+redis-cli -u redis://localhost:6379
+redis-cli -u redis://myuser:mypassword@localhost:6379
+
+# If you run Redis through Docker
+docker exec -it <container-id-or-name> redis-cli
+
+---------------
+> redis-cli
+
+# Test connection
+PING
+
+# Set and get values
+SET myKey "Hello"
+GET myKey
+
+MGET myKey nonExistentKey
+INCR myCounter
+KEYS my*
+EXISTS myKey
+
+# expire in 3 seconds #1
+SET myKey "Hello"
+EXPIRE myKey 3
+GET myKey
+
+# expire in 3 seconds #2
+SETEX myKey 3 "value"
+TTL myKey
+
+# not expire (this is the default)
+SET myKey "Hello"
+PERSIST myKey
+TTL myKey
+
+# find key
+SCAN 0 MATCH myKe* COUNT 2
+
+# Delete key
+DEL myKey
+
+INFO server
+INFO keyspace
+
+
+# Push elements
+LPUSH mylist "first"      # Push to left (head)
+RPUSH mylist "last"       # Push to right (tail)
+
+# Pop elements
+LPOP mylist              # Pop from left
+RPOP mylist              # Pop from right
+
+# Get elements
+LRANGE mylist 0 -1       # Get all elements
+LINDEX mylist 0          # Get element at index
+LLEN mylist             # Get list length
+
+
